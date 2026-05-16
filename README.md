@@ -72,6 +72,11 @@ Part-D 当前已完成：
 
 测试结果：  
 - Accuracy：0.9842  
+- Precision：0.9874  
+- Recall：0.9810  
+- F1-score：0.9842  
+- Macro F1：0.9842  
+- Weighted F1：0.9842  
 
 混淆矩阵：  
 ```text
