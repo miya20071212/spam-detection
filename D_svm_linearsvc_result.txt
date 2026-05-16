@@ -1,0 +1,11 @@
+=== LinearSVC 测试集最终成绩单 ===
+Accuracy: 0.9842
+
+Classification Report:
+             precision    recall  f1-score   support
+           0     0.9811    0.9874    0.9842     15961
+           1     0.9874    0.9810    0.9842     16039
+
+Confusion Matrix:
+[[15760   201]
+ [  304 15735]]
