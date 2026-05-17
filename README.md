@@ -20,7 +20,13 @@ Part-C: 基线模型构建与测试集初步评估
 - `C_week10_eval.py`：第10周评估代码，对基线模型进行稳定运行检查，并补充测试集评估指标  
 - `week10_baseline_report.txt`：第10周测试集评估结果，包括 Accuracy、Precision、Recall、F1-score、ROC-AUC、混淆矩阵等  
 - `week10_predictions.csv`：测试集预测结果  
-- `week10_misclassified.csv`：测试集中误分类样本，便于后续误差分析和报告撰写  
+- `week10_misclassified.csv`：测试集中误分类样本，便于后续误差分析和报告撰写
+
+Part-D：进阶模型构建与评估
+- `D_svm_linearsvc.py`：LinearSVM模型代码，使用TF-IDF+线性分类器（线性核）
+- `D_svm_linearsvc_result.txt`：LinearSVM模型结果记录
+- `D_svm_normalsvc.py`：正常SVM模型代码，使用TF-IDF+非线性分类器（RBF核）
+- `D_svm_normalsvc_result.txt`：正常SVM模型结果记录
 
 ### 当前进度说明
 
