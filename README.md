@@ -40,7 +40,11 @@ Part-C 当前已完成：
 - 完成预测结果与误分类样本导出  
 - 连续运行两次结果一致，说明基线模型代码可以稳定运行，结果可复现  
 
-### 当前基线模型结果
+Part-D 当前已完成：
+- 完成基于 TF-IDF（5000维）+ LinearSVC 的进阶模型构建与评估
+- 完成基于 TF-IDF（5000维）+ 普通SVC 的进阶模型构建与评估
+
+### MultinomialNB模型结果
 
 使用数据：`processed_data_with_tokens.csv`  
 使用列：`tokenized_message`  
@@ -52,10 +56,49 @@ Part-C 当前已完成：
 - Recall：0.9821  
 - F1-score：0.9651  
 - Macro F1：0.9645  
-- Weighted F1：0.9645  
-- ROC-AUC：0.9954  
+- ROC-AUC：0.9954
 
 混淆矩阵：  
 ```text
 [[15151  849]
  [  286 15714]]
+```
+
+### SVM-LinearSVC模型结果
+
+使用数据：`processed_data_with_tokens.csv`  
+使用列：`tokenized_message`  
+模型：TF-IDF（5000维） + LinearSVC  
+
+测试结果：  
+- Accuracy：0.9842  
+- Precision：0.9874  
+- Recall：0.9810  
+- F1-score：0.9842  
+- Macro F1：0.9842    
+
+混淆矩阵：  
+```text
+[[15760   201]
+ [  304 15735]]
+```
+
+### SVM-普通SVC模型结果
+
+使用数据：`processed_data_with_tokens.csv`  
+使用列：`tokenized_message`  
+模型：TF-IDF（5000维） + 普通SVC  
+
+测试结果：  
+- Accuracy：0.9863  
+- Precision：0.9904  
+- Recall：0.9823  
+- F1-score：0.9863  
+- Macro F1：0.9863    
+
+混淆矩阵：  
+```text
+[[15760   153]
+ [  284 15735]]
+```
+
