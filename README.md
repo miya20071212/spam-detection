@@ -108,3 +108,21 @@ Part-D 当前已完成：
  [  284 15735]]
 ```
 
+### 深度学习-LSTM模型结果
+
+使用数据：`processed_data_with_tokens.csv`  
+使用列：`tokenized_message`  
+模型：词嵌入 (5000词表, MAX_LEN=50) + LSTM神经网络 (带早停机制与验证集监控)
+
+测试结果：  
+- Accuracy：0.9888  
+- Precision：0.9934  
+- Recall：0.9841  
+- F1-score：0.9887  
+- Macro F1：0.9888  
+
+混淆矩阵：  
+```text
+[[15856   105]
+ [  255 15784]]
+```
