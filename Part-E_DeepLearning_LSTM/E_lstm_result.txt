@@ -1,0 +1,11 @@
+=== LSTM 测试集最终成绩单 ===
+Accuracy: 0.9888
+
+Classification Report:
+             precision   recall   f1-score    support
+         0     0.9842    0.9934    0.9888     15961
+         1     0.9934    0.9841    0.9887     16039
+
+Confusion Matrix:
+[[15856   105]
+ [  255 15784]]
