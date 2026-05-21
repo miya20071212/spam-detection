@@ -1,134 +1,111 @@
 # spam-detection
 ## 垃圾短信与诈骗邮件的智能检测
 
-### 文件说明
+本项目旨在通过自然语言处理（NLP）与机器学习/深度学习技术，对海量短信与邮件进行智能分类，精准拦截垃圾信息。项目从数据清洗、特征提取，一路演进至基线模型构建、SVM 进阶调优，目前实现了基于 LSTM 神经网络的高精度分类。项目仍在持续迭代优化中。
 
-Part-A:  完成数据清洗与采样平衡脚本，并提供平衡后的数据集
-- `clean_data.csv`：最终平衡后的数据集，可用于训练模型  
-- `process_data.py`：数据清洗脚本，进行正负样本 1:1 平衡  
+---
 
-Part-B: 分词与TF-IDF提取。生成词云图、数据分布图  
-- `B.py`：代码实现  
-- `label_pie_chart.png`：展示样本是否平衡（饼图）  
-- `length_distribution.png`：展示垃圾短信与正常短信特征差异（长度分布图）  
-- `spam_wordcloud.png`：垃圾短信的关键词特征（词云图）  
-- `processed_data_with_tokens.rar`：传递给C的关键文件。解压为 `processed_data_with_tokens.csv`，组员C对 `tokenized_message` 列（已分词）做 TF-IDF（建议设为5000维），再接贝叶斯分类器即可。  
+### 📂 项目目录结构与文件说明
 
-Part-C: 基线模型构建与测试集初步评估  
-- `C_nb.py`：第9周基线模型代码，使用 TF-IDF + 朴素贝叶斯分类器  
-- `C_result.txt`：第9周首次跑通基线模型后的结果记录  
-- `C_week10_eval.py`：第10周评估代码，对基线模型进行稳定运行检查，并补充测试集评估指标  
-- `week10_baseline_report.txt`：第10周测试集评估结果，包括 Accuracy、Precision、Recall、F1-score、ROC-AUC、混淆矩阵等  
-- `week10_predictions.csv`：测试集预测结果  
-- `week10_misclassified.csv`：测试集中误分类样本，便于后续误差分析和报告撰写
+为了保证代码的规范性与可维护性，本项目采用了模块化的工程结构，公共数据统一存放，各阶段代码与产出物互相隔离。
 
-Part-D：进阶模型-SVM构建与评估
-- `D_svm_linearsvc.py`：LinearSVC模型代码，使用TF-IDF + 线性分类器（线性核）
-- `D_svm_linearsvc_result.txt`：LinearSVC模型结果记录
-- `D_svm_normalsvc.py`：正常SVC模型代码，使用TF-IDF + 非线性分类器（RBF核）及网格搜索调参
-- `D_svm_normalsvc_result.txt`：正常SVC模型结果记录
-- `best_standard_svm_model.pkl`：保存的最佳 SVC (RBF核) 模型权重文件，可供后续直接加载使用
+#### 0. `data/` (公共数据依赖)
+集中存放各阶段生成的清洗数据与分词数据，供后续所有模型跨文件夹调用。
+- `clean_data.csv`：A阶段输出的目前平衡后的数据集（正负样本 1:1），用于提取特征。
+- `processed_data_with_tokens.csv`：B阶段输出的核心文件，包含 `tokenized_message` 列（已分词），是 C、D、E 阶段所有模型的标准输入。
+- `*.rar`：因文件体积较大而切分的原始/处理后数据压缩包。
 
-Part-E：进阶模型-LSTM构建与评估
-- `E_lstm_model.py`：LSTM 神经网络训练脚本，包含构建词表、三分法划分数据集（训练/验证/测试）以及早停与自动存档机制
-- `E_lstm_result.txt`：LSTM 模型训练日志与最终成绩单（记录了 Train/Val Loss 的过拟合监控过程及最终准确率）
-- `best_lstm_model.pth`：PyTorch 保存的最佳 LSTM 模型权重（自动保存在验证集 Loss 最低的 Epoch 4 拐点处）
+#### 1. `Part-A_DataCleaning/` (数据清洗与平衡)
+- `process_data.py`：数据预处理脚本，负责清洗冗余信息，并进行正负样本的 1:1 欠采样/过采样平衡。
 
-### 当前进度说明
+#### 2. `Part-B_FeatureExtraction/` (特征工程与可视化)
+- `B.py`：分词与数据可视化主脚本。
+- `label_pie_chart.png`：样本类别平衡度展示（饼图）。
+- `length_distribution.png`：垃圾短信与正常短信的文本长度特征差异（分布图）。
+- `spam_wordcloud.png`：垃圾短信的高频关键词特征（词云图）。
 
-Part-A 已完成：  
-- 完成原始数据清洗  
-- 完成正负样本 1:1 平衡  
-- 输出最终训练数据 `clean_data.csv`  
+#### 3. `Part-C_Baseline_NB/` (朴素贝叶斯基线模型)
+- `C_nb.py` / `C-第九周.py`：第9周基线模型代码，使用 TF-IDF (5000维) + MultinomialNB。
+- `C_week10_eval.py`：第10周评估脚本，用于稳定性测试及补充评估指标。
+- `week10_baseline_report.txt` / `C_result.txt`：评估结果，包含各项指标及混淆矩阵。
+- `week10_predictions.csv`：测试集的完整预测概率与结果。
+- `week10_misclassified.csv`：测试集中的误分类样本，用于后续误差分析。
 
-Part-B 已完成：  
-- 完成文本分词处理  
-- 完成词云图、样本分布图、长度分布图  
-- 输出 `processed_data_with_tokens.csv` 供后续模型训练使用  
+#### 4. `Part-D_Advanced_SVM/` (支持向量机进阶模型)
+- `D_svm_linearsvc.py`：使用 TF-IDF + 线性分类器（LinearSVC）。
+- `D_svm_normalsvc.py`：使用 TF-IDF + 非线性分类器（普通SVC，RBF核）及网格搜索。
+- `D_svm_linearsvc_result.txt` / `D_svm_normalsvc_result.txt`：SVM 模型的详细运行结果与性能评估。
+- `best_standard_svm_model.pkl`：保存的目前最佳 SVC (RBF核) 模型权重文件，可随时加载推理。
 
-Part-C 当前已完成：  
-- 完成 TF-IDF（5000维）+ 朴素贝叶斯 基线模型  
-- 完成测试集初步评估  
-- 完成预测结果与误分类样本导出  
-- 连续运行两次结果一致，说明基线模型代码可以稳定运行，结果可复现  
+#### 5. `Part-E_DeepLearning_LSTM/` (深度学习进阶模型)
+- `E_lstm_model.py`：LSTM 网络训练脚本。包含自定义词表构建、标准的 Train/Val/Test 三分法划分，以及防止过拟合的早停（Early Stopping）和自动存档机制。
+- `E_lstm_result.txt`：LSTM 模型的目前成绩单。
+- `lstm_training_log.txt`：详细记录了 15 轮次训练中 Train Loss 与 Val Loss 的动态变化，精确捕捉过拟合拐点。
+- `best_lstm_model.pth`：PyTorch 保存的目前最佳 LSTM 模型权重（自动锁存在验证集 Loss 最低的 Epoch 4 拐点处）。
 
-Part-D 当前已完成：
-- 完成基于 TF-IDF（5000维）+ LinearSVC 的进阶模型构建与评估
-- 完成基于 TF-IDF（5000维）+ 普通SVC 的进阶模型构建与评估
+---
 
-### MultinomialNB模型结果
+### 🚀 当前进度说明
 
-使用数据：`processed_data_with_tokens.csv`  
-使用列：`tokenized_message`  
-模型：TF-IDF（5000维） + MultinomialNB  
+- **Part-A (已完成)**：清洗原始数据并完成正负样本 1:1 平衡。
+- **Part-B (已完成)**：完成文本分词、统计学可视化，输出标准化数据 `processed_data_with_tokens.csv`。
+- **Part-C (已完成)**：构建 TF-IDF + 朴素贝叶斯基线模型，完成测试集评估与误差样本导出，验证了数据的有效性与代码的稳定性。
+- **Part-D (已完成)**：通过引入 LinearSVC 与非线性 SVC 显著提升了模型的召回率与准确率，确立了传统机器学习的性能天花板。
+- **Part-E (已完成)**：引入深度学习框架 PyTorch，利用词嵌入（Embedding）与长短期记忆网络（LSTM）捕获文本序列信息，配合早停策略，取得目前最佳业务指标。
 
-测试结果：  
-- Accuracy：0.9645  
-- Precision：0.9487  
-- Recall：0.9821  
-- F1-score：0.9651  
-- Macro F1：0.9645  
-- ROC-AUC：0.9954
+---
 
-混淆矩阵：  
-```text
-[[15151  849]
- [  286 15714]]
-```
+### 📊 核心模型性能对比报告
 
-### SVM-LinearSVC模型结果
+以下是本项目的四代模型在相同测试集上的目前评估成绩单。
 
-使用数据：`processed_data_with_tokens.csv`  
-使用列：`tokenized_message`  
-模型：TF-IDF（5000维） + LinearSVC  
+#### 1. MultinomialNB 基线模型
+* **特征/模型**：TF-IDF（5000维） + MultinomialNB
+* **Accuracy (准确率)**：0.9645
+* **Precision (精确率)**：0.9487
+* **Recall (召回率)**：0.9821
+* **F1-score**：0.9651
+* **混淆矩阵**：
+    ```text
+    [[15151   849]
+     [  286 15714]]
+    ```
 
-测试结果：  
-- Accuracy：0.9842  
-- Precision：0.9874  
-- Recall：0.9810  
-- F1-score：0.9842  
-- Macro F1：0.9842    
+#### 2. SVM - LinearSVC 线性模型
+* **特征/模型**：TF-IDF（5000维） + LinearSVC
+* **Accuracy (准确率)**：0.9842
+* **Precision (精确率)**：0.9874
+* **Recall (召回率)**：0.9810
+* **F1-score**：0.9842
+* **混淆矩阵**：
+    ```text
+    [[15760   201]
+     [  304 15735]]
+    ```
 
-混淆矩阵：  
-```text
-[[15760   201]
- [  304 15735]]
-```
+#### 3. SVM - 普通 SVC 非线性模型
+* **特征/模型**：TF-IDF（5000维） + 普通SVC (RBF核)
+* **Accuracy (准确率)**：0.9863
+* **Precision (精确率)**：0.9904
+* **Recall (召回率)**：0.9823
+* **F1-score**：0.9863
+* **混淆矩阵**：
+    ```text
+    [[15760   153]
+     [  284 15735]]
+    ```
 
-### SVM-普通SVC模型结果
+#### 4. 深度学习 - LSTM 序列模型 (🏆 目前最佳落地表现)
+* **特征/模型**：词嵌入 (5000词表, MAX_LEN=50) + LSTM 神经网络
+* **Accuracy (准确率)**：0.9888
+* **Precision (精确率)**：0.9934
+* **Recall (召回率)**：0.9841
+* **F1-score**：0.9887
+* **混淆矩阵**：
+    ```text
+    [[15856   105]
+     [  255 15784]]
+    ```
 
-使用数据：`processed_data_with_tokens.csv`  
-使用列：`tokenized_message`  
-模型：TF-IDF（5000维） + 普通SVC  
-
-测试结果：  
-- Accuracy：0.9863  
-- Precision：0.9904  
-- Recall：0.9823  
-- F1-score：0.9863  
-- Macro F1：0.9863    
-
-混淆矩阵：  
-```text
-[[15760   153]
- [  284 15735]]
-```
-
-### 深度学习-LSTM模型结果
-
-使用数据：`processed_data_with_tokens.csv`  
-使用列：`tokenized_message`  
-模型：词嵌入 (5000词表, MAX_LEN=50) + LSTM神经网络 (带早停机制与验证集监控)
-
-测试结果：  
-- Accuracy：0.9888  
-- Precision：0.9934  
-- Recall：0.9841  
-- F1-score：0.9887  
-- Macro F1：0.9888  
-
-混淆矩阵：  
-```text
-[[15856   105]
- [  255 15784]]
-```
+> **🔥 目前阶段结论**：
+> 随着算法的不断演进，LSTM 神经网络不仅取得了目前最高的综合准确率（**98.88%**），更展现出了极其优异的商业落地潜质。相比于初期的贝叶斯模型（误杀 849 条），LSTM 凭借对上下文语序的理解，将正常短信的误判拦截数（False Positives）极限压缩至仅 **105** 条，完美平衡了“高召回”与“极低误杀率”的核心业务需求。后续将基于此基础继续探索更优化的模型架构。
