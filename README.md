@@ -22,11 +22,17 @@ Part-C: 基线模型构建与测试集初步评估
 - `week10_predictions.csv`：测试集预测结果  
 - `week10_misclassified.csv`：测试集中误分类样本，便于后续误差分析和报告撰写
 
-Part-D：进阶模型构建与评估
-- `D_svm_linearsvc.py`：LinearSVC模型代码，使用TF-IDF+线性分类器（线性核）
-- `D_svm_linearsvc_result.txt`：LinearSVM模型结果记录
-- `D_svm_normalsvc.py`：正常SVC模型代码，使用TF-IDF+非线性分类器（RBF核）
-- `D_svm_normalsvc_result.txt`：正常SVM模型结果记录
+Part-D：进阶模型-SVM构建与评估
+- `D_svm_linearsvc.py`：LinearSVC模型代码，使用TF-IDF + 线性分类器（线性核）
+- `D_svm_linearsvc_result.txt`：LinearSVC模型结果记录
+- `D_svm_normalsvc.py`：正常SVC模型代码，使用TF-IDF + 非线性分类器（RBF核）及网格搜索调参
+- `D_svm_normalsvc_result.txt`：正常SVC模型结果记录
+- `best_standard_svm_model.pkl`：保存的最佳 SVC (RBF核) 模型权重文件，可供后续直接加载使用
+
+Part-E：进阶模型-LSTM构建与评估
+- `E_lstm_model.py`：LSTM 神经网络训练脚本，包含构建词表、三分法划分数据集（训练/验证/测试）以及早停与自动存档机制
+- `E_lstm_result.txt`：LSTM 模型训练日志与最终成绩单（记录了 Train/Val Loss 的过拟合监控过程及最终准确率）
+- `best_lstm_model.pth`：PyTorch 保存的最佳 LSTM 模型权重（自动保存在验证集 Loss 最低的 Epoch 4 拐点处）
 
 ### 当前进度说明
 
