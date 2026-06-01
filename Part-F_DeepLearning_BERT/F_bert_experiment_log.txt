@@ -1,0 +1,59 @@
+=== BERT 多学习率消融实验训练日志 ===
+🚀 BERT 消融实验引擎启动！设备: cuda
+
+🕒 阶段 1：读取原始数据与 BERT 分词处理...
+⚙️ 正在将文本编码为 BERT 矩阵...
+📊 数据划分完成：训练集 99078 | 验证集 14154 | 测试集 28309
+
+==================================================
+⚔️ 正在启动实验组：学习率 LR = 1e-05
+==================================================
+🌟 Epoch 1/6 | 耗时: 659.4s | Train Loss: 0.1184 | Val Acc: 0.9686
+   [!] 发现新高！模型已锁定并保存至 d:\pythonAIpractice\spam-detection\best_bert_lr_1e-05.pth
+🌟 Epoch 2/6 | 耗时: 658.6s | Train Loss: 0.0874 | Val Acc: 0.9751
+   [!] 发现新高！模型已锁定并保存至 d:\pythonAIpractice\spam-detection\best_bert_lr_1e-05.pth
+🌟 Epoch 3/6 | 耗时: 658.4s | Train Loss: 0.0754 | Val Acc: 0.9755
+   [!] 发现新高！模型已锁定并保存至 d:\pythonAIpractice\spam-detection\best_bert_lr_1e-05.pth
+🌟 Epoch 4/6 | 耗时: 657.0s | Train Loss: 0.0640 | Val Acc: 0.9751
+🌟 Epoch 5/6 | 耗时: 11551.9s | Train Loss: 0.0535 | Val Acc: 0.9770
+   [!] 发现新高！模型已锁定并保存至 d:\pythonAIpractice\spam-detection\best_bert_lr_1e-05.pth
+🌟 Epoch 6/6 | 耗时: 663.1s | Train Loss: 0.0451 | Val Acc: 0.9770
+
+🏆 [LR = 1e-05] 训练结束！最佳模型锁定在第 5 轮 (验证集 Acc: 0.9770)
+🕒 正在加载 d:\pythonAIpractice\spam-detection\best_bert_lr_1e-05.pth 进行测试集评估...
+
+==================================================
+⚔️ 正在启动实验组：学习率 LR = 2e-05
+==================================================
+🌟 Epoch 1/6 | 耗时: 11555.7s | Train Loss: 0.1213 | Val Acc: 0.9725
+   [!] 发现新高！模型已锁定并保存至 d:\pythonAIpractice\spam-detection\best_bert_lr_2e-05.pth
+🌟 Epoch 2/6 | 耗时: 660.6s | Train Loss: 0.0889 | Val Acc: 0.9749
+   [!] 发现新高！模型已锁定并保存至 d:\pythonAIpractice\spam-detection\best_bert_lr_2e-05.pth
+🌟 Epoch 3/6 | 耗时: 9020.7s | Train Loss: 0.0788 | Val Acc: 0.9751
+   [!] 发现新高！模型已锁定并保存至 d:\pythonAIpractice\spam-detection\best_bert_lr_2e-05.pth
+🌟 Epoch 4/6 | 耗时: 660.1s | Train Loss: 0.0684 | Val Acc: 0.9752
+   [!] 发现新高！模型已锁定并保存至 d:\pythonAIpractice\spam-detection\best_bert_lr_2e-05.pth
+🌟 Epoch 5/6 | 耗时: 660.6s | Train Loss: 0.0590 | Val Acc: 0.9769
+   [!] 发现新高！模型已锁定并保存至 d:\pythonAIpractice\spam-detection\best_bert_lr_2e-05.pth
+🌟 Epoch 6/6 | 耗时: 659.6s | Train Loss: 0.0502 | Val Acc: 0.9768
+
+🏆 [LR = 2e-05] 训练结束！最佳模型锁定在第 5 轮 (验证集 Acc: 0.9769)
+🕒 正在加载 d:\pythonAIpractice\spam-detection\best_bert_lr_2e-05.pth 进行测试集评估...
+
+==================================================
+⚔️ 正在启动实验组：学习率 LR = 3e-05
+==================================================
+🌟 Epoch 1/6 | 耗时: 661.8s | Train Loss: 0.1203 | Val Acc: 0.9696
+   [!] 发现新高！模型已锁定并保存至 d:\pythonAIpractice\spam-detection\best_bert_lr_3e-05.pth
+🌟 Epoch 2/6 | 耗时: 661.7s | Train Loss: 0.1192 | Val Acc: 0.9677
+🌟 Epoch 3/6 | 耗时: 660.5s | Train Loss: 0.1258 | Val Acc: 0.9662
+🌟 Epoch 4/6 | 耗时: 658.6s | Train Loss: 0.1105 | Val Acc: 0.9704
+   [!] 发现新高！模型已锁定并保存至 d:\pythonAIpractice\spam-detection\best_bert_lr_3e-05.pth
+🌟 Epoch 5/6 | 耗时: 660.1s | Train Loss: 0.0953 | Val Acc: 0.9745
+   [!] 发现新高！模型已锁定并保存至 d:\pythonAIpractice\spam-detection\best_bert_lr_3e-05.pth
+🌟 Epoch 6/6 | 耗时: 659.5s | Train Loss: 0.0836 | Val Acc: 0.9744
+
+🏆 [LR = 3e-05] 训练结束！最佳模型锁定在第 5 轮 (验证集 Acc: 0.9745)
+🕒 正在加载 d:\pythonAIpractice\spam-detection\best_bert_lr_3e-05.pth 进行测试集评估...
+
+🎉 所有消融实验全部运行完毕！请查收您的 log 和 result 文件。

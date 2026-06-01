@@ -1,0 +1,55 @@
+=== BERT 多学习率消融实验 最终成绩单 ===
+
+=== BERT (LR=1e-05) 测试集最终成绩单 ===
+Accuracy: 0.9787
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0     0.9774    0.9799    0.9786     14095
+           1     0.9800    0.9776    0.9788     14214
+
+    accuracy                         0.9787     28309
+   macro avg     0.9787    0.9787    0.9787     28309
+weighted avg     0.9787    0.9787    0.9787     28309
+
+Confusion Matrix:
+[[13811   284]
+ [  319 13895]]
+
+
+=== BERT (LR=2e-05) 测试集最终成绩单 ===
+Accuracy: 0.9776
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0     0.9754    0.9798    0.9776     14095
+           1     0.9799    0.9755    0.9777     14214
+
+    accuracy                         0.9776     28309
+   macro avg     0.9776    0.9776    0.9776     28309
+weighted avg     0.9776    0.9776    0.9776     28309
+
+Confusion Matrix:
+[[13810   285]
+ [  348 13866]]
+
+
+=== BERT (LR=3e-05) 测试集最终成绩单 ===
+Accuracy: 0.9757
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0     0.9705    0.9810    0.9757     14095
+           1     0.9809    0.9705    0.9757     14214
+
+    accuracy                         0.9757     28309
+   macro avg     0.9757    0.9757    0.9757     28309
+weighted avg     0.9758    0.9757    0.9757     28309
+
+Confusion Matrix:
+[[13827   268]
+ [  420 13794]]
+
