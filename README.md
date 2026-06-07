@@ -11,6 +11,7 @@
 - TF-IDF + MultinomialNB 基线模型
 - TF-IDF + SVM 进阶模型
 - 基于 PyTorch 的 LSTM 深度学习模型
+- 基于 Transformer 的 BERT 预训练语言模型
 
 并对不同模型进行系统化性能对比分析，最终构建高精度垃圾短信检测系统。
 
@@ -54,11 +55,16 @@ spam-detection/
 │   ├── D_svm_normalsvc_result.txt
 │   └── best_standard_svm_model.pkl
 │
-└── Part-E_DeepLearning_LSTM/
-    ├── E_lstm_model.py
-    ├── E_lstm_result.txt
-    ├── lstm_training_log.txt
-    └── best_lstm_model.pth
+├── Part-E_DeepLearning_LSTM/
+|   ├── E_lstm_model.py
+|   ├── E_lstm_result.txt
+|   ├── lstm_training_log.txt
+|   └── best_lstm_model.pth
+|
+└── Part-F_DeepLearning_BERT/
+    ├── F_bert_model.py
+    ├── F_bert_result.txt
+    └── F_bert_experiment_log.txt
 ```
 
 ---
@@ -247,6 +253,31 @@ tqdm>=4.65.0
 
 ---
 
+## 6. Part-F_DeepLearning_BERT（BERT 预训练语言模型）
+
+### 核心文件
+
+| 文件名 | 说明 |
+|---|---|
+| F_bert_model.py | BERT 模型训练与测试脚本 |
+
+### 输出结果
+
+| 文件名 | 说明 |
+|---|---|
+| F_bert_result.txt | BERT 模型评估结果 |
+| F_bert_experiment_log.txt | 不同学习率下的实验日志 |
+
+### 功能
+
+- BERT 预训练模型微调
+- 文本语义表示学习
+- 分类性能评估
+- 多学习率消融实验
+- 模型泛化能力分析
+
+---
+
 # 当前项目进度
 
 | 模块 | 状态 | 内容 |
@@ -256,8 +287,10 @@ tqdm>=4.65.0
 | Part-C | 已完成 | 朴素贝叶斯基线模型 |
 | Part-D | 已完成 | SVM 模型优化 |
 | Part-E | 已完成 | LSTM 深度学习模型 |
+| Part-F | 已完成 | BERT 预训练语言模型 |
 
 ---
+
 
 # 数据集说明
 
@@ -395,10 +428,53 @@ Embedding + LSTM
 
 ---
 
+444## 5. BERT 预训练语言模型
+
+### 模型
+
+```text
+Chinese-BERT + Fine-Tuning
+```
+
+### 最优学习率
+
+```text
+Learning Rate = 1e-5
+```
+
+### 性能指标
+
+| 指标 | 数值 |
+|---|---|
+| Accuracy | 0.9787 |
+| Precision | 0.9800 |
+| Recall | 0.9776 |
+| F1-score | 0.9788 |
+
+### 混淆矩阵
+
+```text
+[[13811   284]
+ [  319 13895]]
+```
+### 消融实验结果
+
+| Learning Rate | Accuracy |
+|---|---|
+| 1e-5 | 0.9787 |
+| 2e-5 | 0.9776 |
+| 3e-5 | 0.9757 |
+
+---
+
 # 项目阶段总结
 
 随着模型不断演进，系统整体性能得到显著提升。
 
-相比于初期朴素贝叶斯模型，LSTM 神经网络不仅取得当前最高综合准确率（98.88%），同时显著降低了正常短信误判率（False Positives），将误杀数量从 849 条降低至 105 条，在保证高召回率的同时进一步提升了实际业务应用价值。
+从 TF-IDF + MultinomialNB 基线模型开始，项目逐步完成了 LinearSVC、RBF-SVM、LSTM 以及 BERT 预训练模型的构建与评估，并形成了完整的垃圾短信智能检测技术路线。
 
-后续项目将继续探索更高性能的深度学习模型与文本表示方法，以进一步提升垃圾短信与诈骗邮件检测系统的泛化能力与鲁棒性。
+实验结果表明，传统机器学习模型能够有效完成垃圾短信分类任务，其中 RBF-SVM 取得了 98.63% 的准确率；深度学习模型进一步提升了检测性能，LSTM 模型取得当前最高准确率（98.88%）和 F1-score（0.9887），同时将正常短信误判数量从贝叶斯模型的 849 条降低至 105 条。
+
+此外，项目还开展了 BERT 预训练语言模型及多学习率消融实验。结果显示，BERT 在不同学习率下均表现出良好的稳定性和泛化能力，但其最佳准确率为 97.87%，未超过 LSTM 与 SVM 模型。分析认为，在文本长度较短且类别特征较为集中的垃圾短信数据集上，轻量级序列模型仍具有较强的竞争优势。
+
+后续项目将继续探索更先进的预训练模型与文本表示方法，以进一步提升垃圾短信与诈骗邮件检测系统的泛化能力和鲁棒性。
