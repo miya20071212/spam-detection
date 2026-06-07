@@ -7,9 +7,9 @@
 本项目旨在通过自然语言处理（NLP）与机器学习/深度学习技术，对海量短信与诈骗邮件进行智能分类，实现垃圾信息的自动检测与精准拦截。
 
 项目从数据清洗、文本特征提取逐步演进至传统机器学习模型与深度学习模型构建，目前已经实现：
-
 - TF-IDF + MultinomialNB 基线模型
-- TF-IDF + SVM 进阶模型
+- TF-IDF + LinearSVC 模型
+- TF-IDF + RBF-SVM 模型
 - 基于 PyTorch 的 LSTM 深度学习模型
 - 基于 Transformer 的 BERT 预训练语言模型
 
@@ -110,6 +110,7 @@ wordcloud>=1.9.2
 torch>=2.0.0
 torchvision>=0.15.0
 torchaudio>=2.0.0
+transformers>=4.40.0
 joblib>=1.3.0
 tqdm>=4.65.0
 ```
